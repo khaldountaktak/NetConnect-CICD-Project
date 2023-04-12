@@ -1,0 +1,4 @@
+test:
+    script:
+        - echo $prodENV
+        - cat $prodENV
