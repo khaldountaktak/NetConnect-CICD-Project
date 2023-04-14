@@ -1,4 +1,8 @@
 test:
+    tags:
+        - local
+        - popos
+        - vivobook
     script:
         - echo $prodENV
         - cat $prodENV
