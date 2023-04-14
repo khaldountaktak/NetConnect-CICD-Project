@@ -4,4 +4,4 @@ test:
         - popos
         - vivobook
     script:
-        - echo $prodENV
+        - echo $PROD_NEO4J_SCHEME
