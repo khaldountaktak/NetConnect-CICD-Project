@@ -1,7 +1,27 @@
-test:
+workflow:
+    rules:
+    - if: $CI_COMMIT_BRANCH != "main" && $CI_PIPELINE_SOURCE != "merge-request-event" 
+      when: never
+    - when: always
+
+stages:
+    - test
+    - build
+
+run_unit_test:
     tags:
         - local
         - popos
         - vivobook
+    stage: test
     script:
-        - echo $PROD_NEO4J_SCHEME
+        - echo "unit test"
+
+build_docker_image:
+    tags:
+        - local
+        - popos
+        - vivobook
+    stage: build
+    script:
+        - echo "build docker"
