@@ -6,18 +6,6 @@ export const createDriver = async (config: Neo4jConfig) => {
     neo4j.auth.basic(config.username, config.password),
   );
 
-  const session = driver.session();
-session
-  .run('RETURN 1')
-  .then(() => {
-    console.log('Driver is connected to the database');
-  })
-  .catch((error) => {
-    console.error('Failed to connect to the database', error);
-  })
-  .finally(() => {
-    session.close();
-  });
-
+  
   return driver;
 };
