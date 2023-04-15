@@ -14,8 +14,15 @@ run_unit_test:
         - popos
         - vivobook
     stage: test
+    cache:
+        key: "$CI_COMMIT_REF_NAME"
+        paths:
+            - "node_modules"
+        policy: pull-push
+    before_script:
+        - npm install 
     script:
-        - echo "unit test"
+        - npm run test
 
 build_docker_image:
     tags:
@@ -23,5 +30,33 @@ build_docker_image:
         - popos
         - vivobook
     stage: build
+    before_script:
+        - export PACKAGE_JSON_VERSION=$(cat package.json | jq -r .version)
+        - export VERSION=$PACKAGE_JSON_VERSION.$CI_PIPELINE_IID
+        - echo "VERSION=$VERSION" > .env
+        - echo "JWT_EXPIRES_IN=$PROD_JWT_EXPIRES_IN" >> .env
+        - echo "JWT_SECRET=$PROD_JWT_SECRET" >> .env
+        - echo "NEO4J_SCHEME=$PROD_NEO4J_SCHEME" >> .env
+        - echo "NEO4J_HOST=$PROD_NEO4J_HOST" >> .env
+        - echo "NEO4J_PORT=$PROD_NEO4J_PORT" >> .env
+        - echo "NEO4J_USERNAME=$PROD_NEO4J_USERNAME" >> .env
+        - echo "NEO4J_PASSWORD=$PROD_NEO4J_PASSWORD" >> .env
     script:
-        - echo "build docker"
+        - docker build -t $CI_REGISTRY_IMAGE:$VERSION .
+    artifacts:
+        reports:
+            dotenv: .env
+     
+
+push_docker_image:
+    needs:
+        - build_docker_image
+    tags:
+        - local
+        - popos
+        - vivobook
+    stage: build
+    before_script:
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    script:
+        - docker push $CI_REGISTRY:$VERSION
