@@ -31,6 +31,7 @@ build_docker_image:
         - vivobook
     stage: build
     before_script:
+        - whoami
         - export PACKAGE_JSON_VERSION=$(cat package.json | jq -r .version)
         - export VERSION=$PACKAGE_JSON_VERSION.$CI_PIPELINE_IID
         - echo "VERSION=$VERSION" > .env
