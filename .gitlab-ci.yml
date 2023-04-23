@@ -21,7 +21,6 @@ run_unit_test:
         policy: pull-push
     before_script:
         - npm install 
-        - neo4j console
     script:
         - npm run test
 
