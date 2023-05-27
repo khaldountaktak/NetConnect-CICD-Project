@@ -17,3 +17,9 @@ run_unit_tests:
         - npm install
     script:
         - npm run test:cov
+    artifacts:
+        when: always
+        paths:
+            - ./junit.xml
+        reports:
+            junit: ./junit.xml
