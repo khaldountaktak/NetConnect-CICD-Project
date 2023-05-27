@@ -10,6 +10,7 @@ export class Neo4jModule {
   static forRoot(config: Neo4jConfig): DynamicModule {
     return {
       module: Neo4jModule,
+      global: true,
       providers: [
         Neo4jService,
         {
@@ -32,6 +33,7 @@ export class Neo4jModule {
     return{
       module: Neo4jModule,
       imports: [ConfigModule],
+      global: true,
       providers: [
         {provide: NEO4J_CONFIG,
         ...configProvider
