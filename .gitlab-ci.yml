@@ -16,7 +16,7 @@ run_unit_tests:
     before_script:
         - npm install
     script:
-        - npx jest testCase.service.spec.ts
+        - npm run test:report
     artifacts:
         when: always
         paths:

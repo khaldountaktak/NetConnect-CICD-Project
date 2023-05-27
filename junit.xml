@@ -1,51 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="18" failures="0" errors="0" time="19.168">
-  <testsuite name="Calculator tests" errors="0" failures="0" skipped="0" timestamp="2023-04-26T18:33:44" time="11.418" tests="1">
-    <testcase classname="Calculator tests adding 1 + 2 should return 3" name="Calculator tests adding 1 + 2 should return 3" time="0.004">
+<testsuites name="jest tests" tests="19" failures="1" errors="0" time="30.414">
+  <testsuite name="simple test" errors="0" failures="1" skipped="0" timestamp="2023-05-27T21:21:51" time="9.926" tests="1">
+    <testcase classname="simple test should be equal" name="simple test should be equal" time="0.03">
+      <failure>Error: expect(received).toEqual(expected) // deep equality
+
+Expected: 5
+Received: 3
+    at Object.&lt;anonymous&gt; (C:\Users\USER\Desktop\back\ppp\src\testCase.service.spec.ts:3:21)
+    at Promise.then.completed (C:\Users\USER\Desktop\back\ppp\node_modules\jest-circus\build\utils.js:293:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\USER\Desktop\back\ppp\node_modules\jest-circus\build\utils.js:226:10)
+    at _callCircusTest (C:\Users\USER\Desktop\back\ppp\node_modules\jest-circus\build\run.js:297:40)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at _runTest (C:\Users\USER\Desktop\back\ppp\node_modules\jest-circus\build\run.js:233:3)
+    at _runTestsForDescribeBlock (C:\Users\USER\Desktop\back\ppp\node_modules\jest-circus\build\run.js:135:9)
+    at _runTestsForDescribeBlock (C:\Users\USER\Desktop\back\ppp\node_modules\jest-circus\build\run.js:130:9)
+    at run (C:\Users\USER\Desktop\back\ppp\node_modules\jest-circus\build\run.js:68:3)
+    at runAndTransformResultsToJestFormat (C:\Users\USER\Desktop\back\ppp\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+    at jestAdapter (C:\Users\USER\Desktop\back\ppp\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\Users\USER\Desktop\back\ppp\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\Users\USER\Desktop\back\ppp\node_modules\jest-runner\build\runTest.js:444:34)
+    at Object.worker (C:\Users\USER\Desktop\back\ppp\node_modules\jest-runner\build\testWorker.js:106:12)</failure>
     </testcase>
   </testsuite>
-  <testsuite name="EncryptionService" errors="0" failures="0" skipped="0" timestamp="2023-04-26T18:33:44" time="13.9" tests="5">
-    <testcase classname="EncryptionService should return a string" name="EncryptionService should return a string" time="0.179">
-    </testcase>
-    <testcase classname="EncryptionService should return different outputs" name="EncryptionService should return different outputs" time="0.008">
-    </testcase>
-    <testcase classname="EncryptionService should return true for matching strings after being compared" name="EncryptionService should return true for matching strings after being compared" time="0.318">
-    </testcase>
-    <testcase classname="EncryptionService should return false for non matching plain texts" name="EncryptionService should return false for non matching plain texts" time="0.268">
-    </testcase>
-    <testcase classname="EncryptionService should be defined" name="EncryptionService should be defined" time="0.008">
+  <testsuite name="Calculator tests" errors="0" failures="0" skipped="0" timestamp="2023-05-27T21:21:52" time="10.732" tests="1">
+    <testcase classname="Calculator tests adding 1 + 2 should return 3" name="Calculator tests adding 1 + 2 should return 3" time="0.012">
     </testcase>
   </testsuite>
-  <testsuite name="AppController" errors="0" failures="0" skipped="0" timestamp="2023-04-26T18:33:44" time="16.514" tests="1">
-    <testcase classname="AppController root should return &quot;Hello&quot;" name="AppController root should return &quot;Hello&quot;" time="2.53">
+  <testsuite name="EncryptionService" errors="0" failures="0" skipped="0" timestamp="2023-05-27T21:21:52" time="23.664" tests="5">
+    <testcase classname="EncryptionService should return a string" name="EncryptionService should return a string" time="0.118">
+    </testcase>
+    <testcase classname="EncryptionService should return different outputs" name="EncryptionService should return different outputs" time="0.004">
+    </testcase>
+    <testcase classname="EncryptionService should return true for matching strings after being compared" name="EncryptionService should return true for matching strings after being compared" time="0.156">
+    </testcase>
+    <testcase classname="EncryptionService should return false for non matching plain texts" name="EncryptionService should return false for non matching plain texts" time="0.156">
+    </testcase>
+    <testcase classname="EncryptionService should be defined" name="EncryptionService should be defined" time="0.005">
     </testcase>
   </testsuite>
-  <testsuite name="UserService" errors="0" failures="0" skipped="0" timestamp="2023-04-26T18:33:44" time="16.509" tests="1">
-    <testcase classname="UserService should be defined" name="UserService should be defined" time="2.246">
+  <testsuite name="UserService" errors="0" failures="0" skipped="0" timestamp="2023-05-27T21:21:52" time="27.334" tests="1">
+    <testcase classname="UserService should be defined" name="UserService should be defined" time="0.808">
     </testcase>
   </testsuite>
-  <testsuite name="Neo4jService" errors="0" failures="0" skipped="0" timestamp="2023-04-26T18:33:44" time="17.652" tests="6">
-    <testcase classname="Neo4jService should create a read session" name="Neo4jService should create a read session" time="0.066">
-    </testcase>
-    <testcase classname="Neo4jService should create a write session" name="Neo4jService should create a write session" time="0.019">
-    </testcase>
-    <testcase classname="Neo4jService should read data from the database" name="Neo4jService should read data from the database" time="2.982">
-    </testcase>
-    <testcase classname="Neo4jService should create a new node" name="Neo4jService should create a new node" time="0.893">
-    </testcase>
-    <testcase classname="Neo4jService should connect to the database" name="Neo4jService should connect to the database" time="0.503">
-    </testcase>
-    <testcase classname="Neo4jService should be defined" name="Neo4jService should be defined" time="0.004">
+  <testsuite name="AppController" errors="0" failures="0" skipped="0" timestamp="2023-05-27T21:21:52" time="27.479" tests="1">
+    <testcase classname="AppController root should return &quot;Hello&quot;" name="AppController root should return &quot;Hello&quot;" time="1.164">
     </testcase>
   </testsuite>
-  <testsuite name="AuthService" errors="0" failures="0" skipped="0" timestamp="2023-04-26T18:33:44" time="17.714" tests="4">
-    <testcase classname="AuthService should return a user if valid credentials are provided" name="AuthService should return a user if valid credentials are provided" time="2.295">
+  <testsuite name="AuthService" errors="0" failures="0" skipped="0" timestamp="2023-05-27T21:21:52" time="28.713" tests="4">
+    <testcase classname="AuthService should return a user if valid credentials are provided" name="AuthService should return a user if valid credentials are provided" time="1.098">
     </testcase>
-    <testcase classname="AuthService should return a null if incoorect credentials are provided" name="AuthService should return a null if incoorect credentials are provided" time="0.628">
+    <testcase classname="AuthService should return a null if incoorect credentials are provided" name="AuthService should return a null if incoorect credentials are provided" time="0.674">
     </testcase>
-    <testcase classname="AuthService createToken should return a valid access token" name="AuthService createToken should return a valid access token" time="0.518">
+    <testcase classname="AuthService createToken should return a valid access token" name="AuthService createToken should return a valid access token" time="0.657">
     </testcase>
-    <testcase classname="AuthService should be defined" name="AuthService should be defined" time="0.006">
+    <testcase classname="AuthService should be defined" name="AuthService should be defined" time="0.007">
+    </testcase>
+  </testsuite>
+  <testsuite name="Neo4jService" errors="0" failures="0" skipped="0" timestamp="2023-05-27T21:21:52" time="29.274" tests="6">
+    <testcase classname="Neo4jService should create a read session" name="Neo4jService should create a read session" time="0.039">
+    </testcase>
+    <testcase classname="Neo4jService should create a write session" name="Neo4jService should create a write session" time="0.02">
+    </testcase>
+    <testcase classname="Neo4jService should read data from the database" name="Neo4jService should read data from the database" time="1.501">
+    </testcase>
+    <testcase classname="Neo4jService should create a new node" name="Neo4jService should create a new node" time="0.845">
+    </testcase>
+    <testcase classname="Neo4jService should connect to the database" name="Neo4jService should connect to the database" time="0.568">
+    </testcase>
+    <testcase classname="Neo4jService should be defined" name="Neo4jService should be defined" time="0.008">
     </testcase>
   </testsuite>
 </testsuites>
