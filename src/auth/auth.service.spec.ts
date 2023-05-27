@@ -79,7 +79,7 @@ describe('AuthService', () => {
       const user = node.records[0].get('u');
   
       const token = await authService.createToken(user);
-      console.log(token);
+      // console.log(token);
       
       const decodedToken = jwtService.verify(token.access_token);
   
