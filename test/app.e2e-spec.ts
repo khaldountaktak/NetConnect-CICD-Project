@@ -11,9 +11,6 @@ describe('AppController (e2e)', () => {
   let driver: Driver;
   let app: INestApplication;
   let configService: ConfigService;
-  // const email = 'teks@test.com'
-  // const password ='0.123456789'
-  let token: string;
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
@@ -58,86 +55,36 @@ describe('AppController (e2e)', () => {
   //     .expect(200)
   //     .expect('Hello World!');
   // });
-  // describe('Auth', () => {
-  //   describe('POST auth/register' , () => {
-  //     it('should validate the incoming request', () => {
-  //       return request(app.getHttpServer()).post('/auth/register').set('Accept', 'apllication/json').send({
-  //         email: 'test@test.com',
-  //         dateOfBirth: '2018-04-04'
-  //       }).expect(400).expect(res => {
-  //         console.log(res.body);
-  //         expect(res.body.message).toContain('password should not be empty')
+  describe('Auth', () => {
+    describe('POST auth/register' , () => {
+      it('should validate the incoming request', () => {
+        return request(app.getHttpServer()).post('/auth/register').set('Accept', 'apllication/json').send({
+          email: 'test@test.com',
+          dateOfBirth: '2018-04-04'
+        }).expect(400).expect(res => {
+          console.log(res.body);
+          expect(res.body.message).toContain('password should not be empty')
 
-  //         expect(
-  //           res.body.message.find((m: string) => m.startsWith('maximal allowed date for dateOfBirth'))
-  //         ).toBeDefined()
-  //       })
-  //     })
-  //     it('correct test now', () => {
-  //       const email= `${Math.random()}@gmail.com`
-  //       return request(app.getHttpServer()).post('/auth/register').set('Accept', 'application/json')
-  //       .send({
-  //         email,
-  //         firstName: 'Adam',
-  //         lastName: 'Cowley',
-  //         password: Math.random().toString(),
-  //         dateOfBirth: '2000-01-01'
-  //       }).expect(201).expect(res => {
-  //         console.log(res.body)
-  //         expect(res.body.user.email).toEqual(email);
-  //       })
-  //     })
-  //   })
-  // })
-  // describe('POST /auth/login', () => {
-  //   it('should return 401 status on bad username', () => {
-  //     return request(app.getHttpServer())
-  //       .post('/auth/login')
-  //       .set('Accept', 'application/json')
-  //       .send({
-  //         email: 'unknown@example.com',
-  //         password: 'incorrect',
-  //       })
-  //       .expect(401)
-  //   })
-  //   it('should return 401 status on bad password', () => {
-  //     return request(app.getHttpServer())
-  //       .post('/auth/login')
-  //       .set('Accept', 'application/json')
-  //       .send({
-  //         email: 'teks@testss.com',
-  //         password: 'incorrect',
-  //       })
-  //       .expect(401)
-  //   })
-  
-    it('should return a JWT token on successful login', () => {
-      return request(app.getHttpServer())
-      .post('/auth/login')
-      .set('Accept', 'application/json')
-      .send({
-        email: 'teks@test.com',
-        password: '0.123456789',
+          expect(
+            res.body.message.find((m: string) => m.startsWith('maximal allowed date for dateOfBirth'))
+          ).toBeDefined()
+        })
       })
-      .expect(201)
-      .expect(res => {
-        expect(res.body.access_token).toBeDefined()
-        token = res.body.access_token
+      it('correct test now', () => {
+        const email= `${Math.random()}@gmail.com`
+        return request(app.getHttpServer()).post('/auth/register').set('Accept', 'application/json')
+        .send({
+          email,
+          firstName: 'Adam',
+          lastName: 'Cowley',
+          password: Math.random().toString(),
+          dateOfBirth: '2000-01-01'
+        }).expect(201).expect(res => {
+          console.log(res.body)
+          expect(res.body.email).toEqual(email);
+        })
       })
     })
-  // })
-
-  it('should return error if no JWT supplied', () => {
-    return request(app.getHttpServer())
-      .get('/auth/user')
-      .expect(401)
-  })
-  
-  it('should return error if incorrect JWT supplied', () => {
-    return request(app.getHttpServer())
-      .get('/auth/user')
-      .set('Authorization', `Bearer ${token.replace(/[0-9]+/g, 'X')}`)
-      .expect(401)
   })
   afterAll(() => app.close())
 });

@@ -1,15 +1,14 @@
 import { Type } from "class-transformer";
-import { IsEmail, IsNotEmpty, IsDate, MaxDate} from "class-validator";
-import moment from "moment";
+import { IsEmail, IsNotEmpty, IsDate, MaxDate, IsString, IsEnum, } from "class-validator";
 export enum Gender {
     MALE = 'male',
     FEMALE = 'female',
     OTHER = 'other',
   }
   
-  const maxDate= moment().subtract(18,'y').toDate();
 
 export class CreateUserDto{
+
     @IsEmail()
     @IsNotEmpty()
     email: string;
@@ -19,7 +18,7 @@ export class CreateUserDto{
 
     @IsNotEmpty()
     @IsDate()
-    @MaxDate(maxDate)
+    @MaxDate(require('moment')().subtract(18,'y').toDate())
     @Type(() => Date)
     dateOfBirth: Date;
     // @IsString()

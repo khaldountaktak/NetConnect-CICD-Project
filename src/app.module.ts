@@ -5,10 +5,9 @@ import { Neo4jModule } from './neo4j/neo4j.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
-import { EncryptionModule } from './encryption/encryption.module';
 @Module({
   imports: [
-    ConfigModule.forRoot({isGlobal: true,}),
+    ConfigModule.forRoot(),
     Neo4jModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -23,7 +22,6 @@ import { EncryptionModule } from './encryption/encryption.module';
     }),
     AuthModule,
     UserModule,
-    EncryptionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
