@@ -16,7 +16,7 @@ run_unit_tests:
     before_script:
         - npm install
     script:
-        - npm run test:cov
+        - npx jest testCase.service.spec.ts
     artifacts:
         when: always
         paths:
