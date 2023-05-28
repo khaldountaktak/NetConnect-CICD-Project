@@ -32,6 +32,7 @@ lint_job:
 
 
 run_unit_tests:
+    image: ubuntu:22.04
     stage: test
     coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
     needs:
