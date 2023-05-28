@@ -63,4 +63,5 @@ read_coverage:
     script:
         - $content = Get-Content -Path "h.env"
     needs:
-        - run_unit_tests
+        - job: run_unit_tests
+        artifacts: true
