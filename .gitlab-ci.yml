@@ -8,10 +8,6 @@ stages:
     - build
     - test
 
-extract:
-    script:
-        - "All files |    39.1 |    53.84 |   47.05 |   37.86 |"  | Select-String -Pattern 'All files\s+\|\s+([\d.]+)' | 
-
 
 # lint_job:
 #     stage: clean
@@ -34,22 +30,30 @@ extract:
 
 
 
-# run_unit_tests:
-#     stage: test
-#     coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-#     needs:
-#         - lint_job
-#     tags:
-#         - local
-#         - windows
-#     before_script:
-#         - npm install
-#     script:
-#         - npm run test:report | Select-String -Pattern 'All files\s+\|\s+([\d.]+)' | ForEach-Object { ($_ -split '\|')[1].Trim() }
-#     artifacts:
-#         when: always
-#         paths:
-#             - ./junit.xml
-#         reports:
-#             junit: ./junit.xml
+run_unit_tests:
+    stage: test
+    cache:
+        key: "$CI_COMMIT_REF_NAME"
+        paths:
+            - "node_modules"
+        policy: pull-push
+    coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+    needs:
+        - lint_job
+    tags:
+        - local
+        - windows
+    before_script:
+        - npm install
+    script:
+        - $output = npm run test:report
+        - $splitValues = $output.Split("|")
+        - echo $SplitValues
+
+    artifacts:
+        when: always
+        paths:
+            - ./junit.xml
+        reports:
+            junit: ./junit.xml
 
