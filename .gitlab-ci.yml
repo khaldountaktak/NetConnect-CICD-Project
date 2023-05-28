@@ -58,6 +58,7 @@ run_unit_tests:
             dotenv: coverage.env
 
 read_coverage:
+    stage: test
     script:
         - $output=cat coverage.env
         - $curr_coverage= $output -split '\=' 
