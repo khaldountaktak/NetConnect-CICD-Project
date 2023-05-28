@@ -33,7 +33,8 @@ variables:
 
 run_unit_tests:
     stage: test
-    needs: lint_job
+    needs: 
+        - lint_job
     coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
 
     tags:
