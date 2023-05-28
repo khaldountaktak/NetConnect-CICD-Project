@@ -16,11 +16,11 @@ lint_job:
         - windows
         - local 
     cache:
-    key: "$CI_COMMIT_REF_NAME"
-    paths:
-        - "node_modules"
-    policy: pull-push
-    before_script:
+        key: "$CI_COMMIT_REF_NAME"
+        paths:
+            - "node_modules"
+        policy: pull-push
+       before_script:
         - npm install
     script:
         - echo "formatting code"
