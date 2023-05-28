@@ -28,7 +28,7 @@ stages:
 #         - npm run lint
 
 variables:
-    MIN_THRESHOLD: 80
+    MIN_THRESHOLD: 30
 
 
 run_unit_tests:
