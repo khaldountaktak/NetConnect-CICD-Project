@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="19" failures="0" errors="0" time="17.175">
-  <testsuite name="Calculator tests" errors="0" failures="0" skipped="0" timestamp="2023-05-28T08:37:21" time="10.507" tests="1">
-    <testcase classname="Calculator tests adding 1 + 2 should return 3" name="Calculator tests adding 1 + 2 should return 3" time="0.009">
+<testsuites name="jest tests" tests="19" failures="0" errors="0" time="14.86">
+  <testsuite name="Calculator tests" errors="0" failures="0" skipped="0" timestamp="2023-05-28T08:49:52" time="9.969" tests="1">
+    <testcase classname="Calculator tests adding 1 + 2 should return 3" name="Calculator tests adding 1 + 2 should return 3" time="0.01">
     </testcase>
   </testsuite>
-  <testsuite name="simple test" errors="0" failures="0" skipped="0" timestamp="2023-05-28T08:37:21" time="10.648" tests="1">
+  <testsuite name="simple test" errors="0" failures="0" skipped="0" timestamp="2023-05-28T08:49:52" time="9.978" tests="1">
     <testcase classname="simple test should be equal" name="simple test should be equal" time="0.005">
     </testcase>
   </testsuite>
-  <testsuite name="EncryptionService" errors="0" failures="0" skipped="0" timestamp="2023-05-28T08:37:21" time="12.87" tests="5">
-    <testcase classname="EncryptionService should return a string" name="EncryptionService should return a string" time="0.156">
+  <testsuite name="EncryptionService" errors="0" failures="0" skipped="0" timestamp="2023-05-28T08:49:52" time="11.951" tests="5">
+    <testcase classname="EncryptionService should return a string" name="EncryptionService should return a string" time="0.184">
     </testcase>
-    <testcase classname="EncryptionService should return different outputs" name="EncryptionService should return different outputs" time="0.008">
+    <testcase classname="EncryptionService should return different outputs" name="EncryptionService should return different outputs" time="0.011">
     </testcase>
-    <testcase classname="EncryptionService should return true for matching strings after being compared" name="EncryptionService should return true for matching strings after being compared" time="0.259">
+    <testcase classname="EncryptionService should return true for matching strings after being compared" name="EncryptionService should return true for matching strings after being compared" time="0.262">
     </testcase>
-    <testcase classname="EncryptionService should return false for non matching plain texts" name="EncryptionService should return false for non matching plain texts" time="0.275">
+    <testcase classname="EncryptionService should return false for non matching plain texts" name="EncryptionService should return false for non matching plain texts" time="0.235">
     </testcase>
-    <testcase classname="EncryptionService should be defined" name="EncryptionService should be defined" time="0.005">
-    </testcase>
-  </testsuite>
-  <testsuite name="AppController" errors="0" failures="0" skipped="0" timestamp="2023-05-28T08:37:21" time="13.05" tests="1">
-    <testcase classname="AppController root should return &quot;Hello&quot;" name="AppController root should return &quot;Hello&quot;" time="0.774">
+    <testcase classname="EncryptionService should be defined" name="EncryptionService should be defined" time="0.006">
     </testcase>
   </testsuite>
-  <testsuite name="UserService" errors="0" failures="0" skipped="0" timestamp="2023-05-28T08:37:21" time="13.183" tests="1">
-    <testcase classname="UserService should be defined" name="UserService should be defined" time="0.789">
+  <testsuite name="AppController" errors="0" failures="0" skipped="0" timestamp="2023-05-28T08:49:52" time="12.05" tests="1">
+    <testcase classname="AppController root should return &quot;Hello&quot;" name="AppController root should return &quot;Hello&quot;" time="0.802">
     </testcase>
   </testsuite>
-  <testsuite name="AuthService" errors="0" failures="0" skipped="0" timestamp="2023-05-28T08:37:21" time="15.355" tests="4">
-    <testcase classname="AuthService should return a user if valid credentials are provided" name="AuthService should return a user if valid credentials are provided" time="0.799">
+  <testsuite name="UserService" errors="0" failures="0" skipped="0" timestamp="2023-05-28T08:49:52" time="12.259" tests="1">
+    <testcase classname="UserService should be defined" name="UserService should be defined" time="0.615">
     </testcase>
-    <testcase classname="AuthService should return a null if incoorect credentials are provided" name="AuthService should return a null if incoorect credentials are provided" time="0.791">
+  </testsuite>
+  <testsuite name="AuthService" errors="0" failures="0" skipped="0" timestamp="2023-05-28T08:49:52" time="13.13" tests="4">
+    <testcase classname="AuthService should return a user if valid credentials are provided" name="AuthService should return a user if valid credentials are provided" time="0.707">
     </testcase>
-    <testcase classname="AuthService createToken should return a valid access token" name="AuthService createToken should return a valid access token" time="1.222">
+    <testcase classname="AuthService should return a null if incoorect credentials are provided" name="AuthService should return a null if incoorect credentials are provided" time="0.503">
+    </testcase>
+    <testcase classname="AuthService createToken should return a valid access token" name="AuthService createToken should return a valid access token" time="0.509">
     </testcase>
     <testcase classname="AuthService should be defined" name="AuthService should be defined" time="0.007">
     </testcase>
   </testsuite>
-  <testsuite name="Neo4jService" errors="0" failures="0" skipped="0" timestamp="2023-05-28T08:37:21" time="15.806" tests="6">
-    <testcase classname="Neo4jService should create a read session" name="Neo4jService should create a read session" time="0.042">
+  <testsuite name="Neo4jService" errors="0" failures="0" skipped="0" timestamp="2023-05-28T08:49:52" time="13.607" tests="6">
+    <testcase classname="Neo4jService should create a read session" name="Neo4jService should create a read session" time="0.041">
     </testcase>
-    <testcase classname="Neo4jService should create a write session" name="Neo4jService should create a write session" time="0.01">
+    <testcase classname="Neo4jService should create a write session" name="Neo4jService should create a write session" time="0.008">
     </testcase>
-    <testcase classname="Neo4jService should read data from the database" name="Neo4jService should read data from the database" time="1.227">
+    <testcase classname="Neo4jService should read data from the database" name="Neo4jService should read data from the database" time="1.116">
     </testcase>
-    <testcase classname="Neo4jService should create a new node" name="Neo4jService should create a new node" time="1.73">
+    <testcase classname="Neo4jService should create a new node" name="Neo4jService should create a new node" time="0.673">
     </testcase>
-    <testcase classname="Neo4jService should connect to the database" name="Neo4jService should connect to the database" time="0.735">
+    <testcase classname="Neo4jService should connect to the database" name="Neo4jService should connect to the database" time="0.53">
     </testcase>
-    <testcase classname="Neo4jService should be defined" name="Neo4jService should be defined" time="0.003">
+    <testcase classname="Neo4jService should be defined" name="Neo4jService should be defined" time="0.002">
     </testcase>
   </testsuite>
 </testsuites>
