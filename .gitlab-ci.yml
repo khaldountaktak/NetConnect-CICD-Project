@@ -32,7 +32,6 @@ lint_job:
 
 
 run_unit_tests:
-    image: ubuntu:22.04
     stage: test
     coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
     needs:
@@ -43,7 +42,7 @@ run_unit_tests:
     before_script:
         - npm install
     script:
-        - npm run test:report | grep -E /All files[^|]*\|[^|]*\s+([\d\.]+)/
+        - npm run test:report | Select-String -Pattern 'All files[^|]*\|[^|]*\s+([\d\.]+)'
     artifacts:
         when: always
         paths:
