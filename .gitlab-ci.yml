@@ -63,7 +63,9 @@ run_unit_tests:
 
 read_coverage:
     script:
-        - ls
-        - cat coverage.env
+        - $output=cat coverage.env
+        - $curr_coverage= $output -split '\=' 
+        - $curr_coverage=$curr_coverage[1].Trim()
+        - echo $curr_coverage
     dependencies:
         - run_unit_tests
