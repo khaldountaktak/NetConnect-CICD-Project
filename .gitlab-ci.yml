@@ -80,7 +80,7 @@ build_docker_image:
         - read_coverage
     tags:
         - local
-        - majaro
+        - ubuntu
     stage: build
     before_script:
         - export PACKAGE_JSON_VERSION=$(cat package.json | jq -r .version)
@@ -106,7 +106,7 @@ push_docker_image:
         - build_docker_image
     tags:
         - local
-        - majaro
+        - ubuntu
 
     stage: build
     before_script:
