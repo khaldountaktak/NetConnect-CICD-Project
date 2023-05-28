@@ -62,5 +62,6 @@ run_unit_tests:
 read_coverage:
     script:
         - echo $coverage
+        - ls
     dependencies:
         - run_unit_tests
