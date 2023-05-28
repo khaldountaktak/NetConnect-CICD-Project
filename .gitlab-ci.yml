@@ -51,6 +51,7 @@ run_unit_tests:
         - $extractedValue = $splitValues[1].Trim()
         - echo $extractedValue
         - $extractedValue >> coverage.env
+        - ls
     artifacts:
         when: always
         paths:
