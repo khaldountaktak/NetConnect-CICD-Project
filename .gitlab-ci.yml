@@ -4,8 +4,9 @@ workflow:
       when: never
     - when: always
 stages:
-    - build
     - test
+    - build
+
 
 
 lint_job:
