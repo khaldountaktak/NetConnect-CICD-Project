@@ -43,7 +43,7 @@ run_unit_tests:
     before_script:
         - npm install
     script:
-        - npm run test:report
+        - npm run test:report >> grep /All files[^|]*\|[^|]*\s+([\d\.]+)/
     artifacts:
         when: always
         paths:
