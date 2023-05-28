@@ -4,13 +4,12 @@ workflow:
       when: never
     - when: always
 stages:
-    - clean
     - build
     - test
 
 
 lint_job:
-    stage: clean
+    stage: test
     tags: 
         - windows
         - local 
@@ -76,6 +75,8 @@ read_coverage:
           artifacts: true
 
 build_docker_image:
+    needs:
+        - read_coverage
     tags:
         - local
         - majaro
