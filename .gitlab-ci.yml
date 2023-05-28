@@ -47,6 +47,7 @@ run_unit_tests:
         - npm install
     script:
         - $output = npm run test:report | Select-String -Pattern 'All files[^|]*\|[^|]*\s+([\d\.]+)'
+        - echo $output
         - $splitValues = $output -split '\|'
         - $extractedValue = $splitValues[1].Trim()
         - echo $extractedValue
