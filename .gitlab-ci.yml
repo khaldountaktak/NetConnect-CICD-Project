@@ -55,13 +55,14 @@ run_unit_tests:
         when: always
         paths:
             - ./junit.xml
+            - ./coverage.env
         reports:
             junit: ./junit.xml
             dotenv: coverage.env
 
 read_coverage:
     script:
-        - echo $coverage
+        - cat coverage.env
         - ls
     dependencies:
         - run_unit_tests
