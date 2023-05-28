@@ -47,7 +47,8 @@ run_unit_tests:
     script:
         - $output = npm run test:report | Select-String -Pattern 'All files[^|]*\|[^|]*\s+([\d\.]+)'
         - $splitValues = $output -split '\|'
-        - echo $SplitValues
+        - $extractedValue = $splitValues[1].Trim()
+        - echo $extractedValue
 
     artifacts:
         when: always
