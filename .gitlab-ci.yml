@@ -27,7 +27,8 @@ stages:
 #         - echo "linting code"
 #         - npm run lint
 
-
+variables:
+    MIN_THRESHOLD: 30
 
 
 run_unit_tests:
@@ -49,11 +50,17 @@ run_unit_tests:
         - $splitValues = $output -split '\|'
         - $extractedValue = $splitValues[1].Trim()
         - echo $extractedValue
-
+        - $extractedValue >> coverage.env
     artifacts:
         when: always
         paths:
             - ./junit.xml
         reports:
             junit: ./junit.xml
+            dotenv: coverage.env
 
+read_coverage:
+    script:
+        - $content = Get-Content -Path "h.env"
+    needs:
+        - run_unit_tests
