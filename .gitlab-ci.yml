@@ -49,6 +49,4 @@ run_unit_tests:
             - ./junit.xml
         reports:
             junit: ./junit.xml
-            coverage_report:
-                coverage_format: cobertura
-                path: coverage/cobertura-coverage.xml
+
