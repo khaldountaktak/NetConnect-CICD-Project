@@ -50,8 +50,7 @@ run_unit_tests:
         - $splitValues = $output -split '\|'
         - $extractedValue = $splitValues[1].Trim()
         - echo $extractedValue
-        - $extractedValue >> coverage.env
-        - ls
+        - echo coverage=$extractedValue >> coverage.env
     artifacts:
         when: always
         paths:
