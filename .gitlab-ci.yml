@@ -38,8 +38,7 @@ run_unit_tests:
             - "node_modules"
         policy: pull-push
     coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-    needs:
-        - lint_job
+
     tags:
         - local
         - windows
