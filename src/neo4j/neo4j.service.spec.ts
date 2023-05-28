@@ -6,17 +6,17 @@ import { Neo4jConfig } from './neo4j-config/neo4j-config.interface';
 import { createDriver } from './neo4j.utils';
 import { Driver } from 'neo4j-driver';
 
-
 describe('Neo4jService', () => {
   let service: Neo4jService;
-  let configService: ConfigService;
   let driver: Driver;
-
+  let configService: ConfigService;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ConfigModule.forRoot({
-        isGlobal: true,
-      })],
+      imports: [
+        ConfigModule.forRoot({
+          isGlobal: true,
+        }),
+      ],
       providers: [
         Neo4jService,
         {
@@ -49,8 +49,7 @@ describe('Neo4jService', () => {
   afterEach(async () => {
     await driver.close();
   });
-  const ID: number= Math.random();
-
+  const ID: number = Math.random();
 
   // it('should return a valid read session object with the correct access mode', () => {
   //   const session = service.getReadSession();
@@ -78,44 +77,37 @@ describe('Neo4jService', () => {
       'CREATE (n:Person { name: $name }) RETURN n',
       { name: ID },
     );
-  
+    expect(createResult).toBeTruthy();
     // Read the Person node from the database
     const readResult = await service.read(
       'MATCH (n:Person { name: $name }) RETURN n',
       { name: ID },
     );
-  
+
     // Assert that the read result contains one record with a Person node
     expect(readResult.records).toHaveLength(1);
     expect(readResult.records[0].get('n').properties.name).toEqual(ID);
-  
+
     // Clean up by deleting the Person node from the database
-    await service.write(
-      'MATCH (n:Person { name: $name }) DELETE n',
-      { name: ID },
-    );
+    await service.write('MATCH (n:Person { name: $name }) DELETE n', {
+      name: ID,
+    });
   });
-  
+
   it('should create a new node', async () => {
     const result = await service.write(
       'CREATE (n:TestNode {name: $name}) RETURN n',
-      { name: ID }
+      { name: ID },
     );
     expect(result.records.length).toEqual(1);
     expect(result.records[0].get('n').properties.name).toEqual(ID);
-    await service.write(
-      'MATCH (n:Person { name: $name }) DELETE n',
-      { name: ID },
-    );
+    await service.write('MATCH (n:Person { name: $name }) DELETE n', {
+      name: ID,
+    });
   });
-  
-  
 
   it('should connect to the database', async () => {
-    const result = await service.read(
-      'MATCH (n) RETURN count(n) as count',
-      {},
-    );
+    const result = await service.read('MATCH (n) RETURN count(n) as count', {});
     expect(result.records[0].get('count').toNumber()).toBeGreaterThan(0);
   });
 

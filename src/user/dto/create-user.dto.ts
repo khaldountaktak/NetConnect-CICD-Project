@@ -7,6 +7,7 @@ import {
   IsString,
   IsEnum,
 } from 'class-validator';
+import moment from 'moment';
 
 export enum Gender {
   MALE = 'male',
@@ -31,7 +32,7 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsDate()
-  @MaxDate(require('moment')().subtract(18, 'y').toDate())
+  @MaxDate(moment().subtract(18, 'y').toDate())
   @Type(() => Date)
   dateOfBirth: Date;
 

@@ -1,5 +1,4 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
 import { Neo4jService } from './neo4j/neo4j.service';
 
 @Controller()
@@ -12,7 +11,6 @@ export class AppController {
       `MATCH (n) RETURN count(n) AS count`,
     );
 
-    // return `There are ${res.records[0].get('count')} nodes in the database`;
-      return 'Hello'
+    return `There are ${res.records[0].get('count')} nodes in the database`;
   }
 }

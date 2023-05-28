@@ -36,16 +36,19 @@ export class AuthService {
     >user.properties;
 
     return {
-      access_token: this.jwtService.sign({
-        sub: id,
-        firstName,
-        lastName,
-        email,
-        dateOfBirth,
-        gender,
-      },{
-        secret: this.configServicce.get('JWT_SECRET')
-      }),
+      access_token: this.jwtService.sign(
+        {
+          sub: id,
+          firstName,
+          lastName,
+          email,
+          dateOfBirth,
+          gender,
+        },
+        {
+          secret: this.configServicce.get('JWT_SECRET'),
+        },
+      ),
     };
   }
 }
