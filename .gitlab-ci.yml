@@ -67,9 +67,9 @@ read_coverage:
         - $curr_coverage=$curr_coverage[1].Trim()
         - echo $curr_coverage
         - | 
-        if ([double]$curr_coverage -lt [double]$MIN_THRESHOLD) {
-        exit 1
-        }
+          if ([double]$curr_coverage -lt [double]$MIN_THRESHOLD) {
+          exit 1
+          }
     needs:
         - job: run_unit_tests
           artifacts: true
