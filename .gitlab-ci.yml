@@ -9,23 +9,23 @@ stages:
     - test
 
 
-# lint_job:
-#     stage: clean
-#     tags: 
-#         - windows
-#         - local 
-#     cache:
-#         key: "$CI_COMMIT_REF_NAME"
-#         paths:
-#             - "node_modules"
-#         policy: pull-push
-#     before_script:
-#         - npm install
-#     script:
-#         - echo "formatting code"
-#         - npm run format
-#         - echo "linting code"
-#         - npm run lint
+lint_job:
+    stage: clean
+    tags: 
+        - windows
+        - local 
+    cache:
+        key: "$CI_COMMIT_REF_NAME"
+        paths:
+            - "node_modules"
+        policy: pull-push
+    before_script:
+        - npm install
+    script:
+        - echo "formatting code"
+        - npm run format
+        - echo "linting code"
+        - npm run lint
 
 variables:
     MIN_THRESHOLD: 30
@@ -33,11 +33,7 @@ variables:
 
 run_unit_tests:
     stage: test
-    cache:
-        key: "$CI_COMMIT_REF_NAME"
-        paths:
-            - "node_modules"
-        policy: pull-push
+    needs: lint_job
     coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
 
     tags:
