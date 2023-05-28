@@ -42,7 +42,7 @@ run_unit_tests:
     before_script:
         - npm install
     script:
-        - npm run test:report | Select-String -Pattern 'All files\s+\|\s+([\d.]+)'
+        - npm run test:report | Select-String -Pattern 'All files\s+\|\s+([\d.]+)' | ForEach-Object { ($_ -split '\|')[1].Trim() }
     artifacts:
         when: always
         paths:
