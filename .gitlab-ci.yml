@@ -45,7 +45,7 @@ run_unit_tests:
     before_script:
         - npm install
     script:
-        - $output = npm run test:report
+        - $output = npm run test:report | Select-String -Pattern 'All files[^|]*\|[^|]*\s+([\d\.]+)'
         - $splitValues = $output.Split("|")
         - echo $SplitValues
 
