@@ -60,6 +60,8 @@ run_unit_tests:
 
 read_coverage:
     stage: test
+    tags:
+        - windows
     script:
         - $output=cat coverage.env
         - $curr_coverage= $output -split '\=' 
@@ -76,6 +78,7 @@ read_coverage:
 build_docker_image:
     tags:
         - local
+        - majaro
     stage: build
     before_script:
         - export PACKAGE_JSON_VERSION=$(cat package.json | jq -r .version)
@@ -101,6 +104,7 @@ push_docker_image:
         - build_docker_image
     tags:
         - local
+        - majaro
 
     stage: build
     before_script:
