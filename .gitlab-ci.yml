@@ -52,7 +52,6 @@ run_unit_tests:
         - echo $extractedValue
         - echo coverage=$extractedValue >> coverage.env
     artifacts:
-        expires_in: 1 week
         when: always
         paths:
             - ./junit.xml
@@ -65,5 +64,6 @@ read_coverage:
     script:
         - ls
         - cat coverage.env
-    dependencies:
-        - run_unit_tests
+    needs:
+        - job: run_unit_tests
+          artifacts: true
