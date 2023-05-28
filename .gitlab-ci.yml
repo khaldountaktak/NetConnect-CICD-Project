@@ -10,7 +10,7 @@ stages:
 
 extract:
     script:
-        - "All files |    39.1 |    53.84 |   47.05 |   37.86 |"  | Select-String -Pattern 'All files\s+\|\s+([\d.]+)' | 
+        - echo All files |    39.1 |    53.84 |   47.05 |   37.86 |  | Select-String -Pattern 'All files\s+\|\s+([\d.]+)' | 
 
 
 # lint_job:
