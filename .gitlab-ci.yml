@@ -61,6 +61,6 @@ run_unit_tests:
 
 read_coverage:
     script:
-        - $content = Get-Content -Path "h.env"
+        - echo $coverage
     dependencies:
         - run_unit_tests
