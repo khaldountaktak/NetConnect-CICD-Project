@@ -70,20 +70,20 @@ resource "aws_security_group" "ppp_sg" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_block = [var.myip]
+    cidr_blocks = [var.myip]
   }
   ingress {
     from_port = 3000
     to_port = 3000
     protocol = "tcp"
-    cidr_block = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
     from_port = 0
     to_port = 0
     protocol = "-1"
-    cidr_block = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]
     prefix_list_ids=[]
   }
 
