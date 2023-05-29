@@ -119,7 +119,8 @@ resource "aws_instance" "ppp_ec2" {
 
     provisioner "remote-exec" {
         inline = [
-            apt update && apt upgrade -y,
+            apt update,
+            apt upgrade -y,
             apt install docker.io
         ]
   }
