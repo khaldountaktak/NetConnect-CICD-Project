@@ -1,6 +1,6 @@
 workflow:
     rules:
-    - if: $CI_COMMIT_BRANCH != "khaldoun" && $CI_PIPELINE_SOURCE != "merge-request-event" 
+    - if: $CI_COMMIT_BRANCH != "main" && $CI_PIPELINE_SOURCE != "merge-request-event" 
       when: never
     - when: always
 stages:
@@ -40,8 +40,6 @@ run_unit_tests:
     tags:
         - local
         - windows
-    before_script:
-        - npm install
     script:
         - $output = npm run test:report | Select-String -Pattern 'All files[^|]*\|[^|]*\s+([\d\.]+)'
         - echo $output
