@@ -28,3 +28,10 @@ resource "aws_subnet" "ppp_subnet" {
     Name = "${var.env_prefix}-subnet"
   }
 }
+
+resource "aws_internet_gateway" "ppp_igw" {
+  vpc_id = aws_vpc.ppp_vpc.id
+  tags = {
+    Name = "${var.env_prefix}-igw"
+  }
+}
