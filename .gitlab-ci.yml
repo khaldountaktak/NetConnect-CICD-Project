@@ -129,6 +129,6 @@ deploy_terraform:
         # - terraform init
         - export AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID"
         - export AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY"
-        - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa.pem
+        - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/id_rsa.pem
     script:
         - terraform apply --auto-approve
