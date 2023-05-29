@@ -1,12 +1,12 @@
 terraform {
   backend "http" {
   }
-  required_providers {
-    ansible = {
-      version = "~> 1.1.0"
-      source  = "ansible/ansible"
-    }
-  }
+  #required_providers {
+    # ansible = {
+    #  version = "~> 1.1.0"
+     # source  = "ansible/ansible"
+   # }
+  #}
 }
 
 provider "aws"{
@@ -110,18 +110,32 @@ resource "aws_instance" "ppp_ec2" {
     
     # user_data = file("")
 
+    connection {
+        type     = "ssh"
+        user     = "root"
+        password = var.root_password
+        host     = self.public_ip
+    }
+
+    provisioner "remote-exec" {
+        inline = [
+            apt update && apt upgrade -y,
+            apt install docker.io
+        ]
+  }
+
     tags = {
     name = "${var.env_prefix}-ec2"
   }
 }
 
-resource "ansible_host" "host" {
-    name = "ec2"
-}
+#resource "ansible_host" "host" {
+#    name = "ec2"
+#}
 
-resource "ansible_playbook" "playbook" {
-  playbook   = "playbook.yml"
-  name       = ansible_host.host.name
-  replayable = true
-
-}
+#resource "ansible_playbook" "playbook" {
+#  playbook   = "playbook.yml"
+#  name       = ansible_host.host.name
+#  replayable = true
+#
+#}
