@@ -3,6 +3,7 @@ provider "aws"{
 }
 
 variable "vpc_cidr_blocks" {}
+variable "env_prefix" {}
 
 resource "aws_vpc" "vpc" {
     cidr_block = var.vpc_cidr_blocks
