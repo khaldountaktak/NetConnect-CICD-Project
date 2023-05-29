@@ -48,7 +48,7 @@ resource "aws_internet_gateway" "ppp_igw" {
 
 resource "aws_route_table" "ppp_rt" {
   vpc_id = aws_vpc.ppp_vpc.id
-  route = {
+  route {
     cidr_block="0.0.0.0/0"
     gateway_id=aws_internet_gateway.ppp_igw.id
   }
@@ -63,28 +63,29 @@ resource "aws_route_table_association" "ppp_rta" {
 }
 
 resource "aws_security_group" "ppp_sg" {
-  Name = "ppp_sg"
+  name = "ppp_sg"
   vpc_id = aws_vpc.ppp_vpc.id
 
-  ingress = [{
+  ingress {
     from_port = 22
     to_port = 22
     protocol = "tcp"
     cidr_block = [var.myip]
-  }, {
+  }
+  ingress {
     from_port = 3000
     to_port = 3000
     protocol = "tcp"
     cidr_block = ["0.0.0.0/0"]
-  }]
+  }
 
-  egress = [{
+  egress {
     from_port = 0
     to_port = 0
     protocol = "-1"
     cidr_block = ["0.0.0.0/0"]
     prefix_list_ids=[]
-  }]
+  }
 
   tags = {
     Name = "${var.env_prefix}-security-group"
@@ -120,7 +121,7 @@ resource "ansible_host" "host" {
 
 resource "ansible_playbook" "playbook" {
   playbook   = "playbook.yml"
-  name       = var.ansible_host.host.name
+  name       = ansible_host.host.name
   replayable = true
 
 }
