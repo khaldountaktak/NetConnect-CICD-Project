@@ -5,6 +5,7 @@ provider "aws"{
 variable "env_prefix" {}
 variable "vpc_cidr_blocks" {}
 variable "subnet_cidr_blocks" {}
+variable "avail_zone" {}
 
 
 resource "aws_vpc" "ppp_vpc" {
@@ -15,8 +16,9 @@ resource "aws_vpc" "ppp_vpc" {
 }
 
 resource "aws_subnet" "ppp_subnet" {
-  vpc_id = aws_vpc.ppp_vpc
+  vpc_id = aws_vpc.ppp_vpc.id
   cidr_block = var.subnet_cidr_blocks
+  availability_zone = var.avail_zone
   tags = {
     Name = "${var.env_prefix}-subnet"
   }
