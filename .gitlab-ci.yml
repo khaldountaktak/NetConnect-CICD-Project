@@ -4,13 +4,13 @@ workflow:
       when: never
     - when: always
 stages:
-    - clean
-    - build
     - test
+    - build
+
 
 
 lint_job:
-    stage: clean
+    stage: test
     tags: 
         - windows
         - local 
@@ -58,6 +58,8 @@ run_unit_tests:
 
 read_coverage:
     stage: test
+    tags:
+        - windows
     script:
         - $output=cat coverage.env
         - $curr_coverage= $output -split '\=' 
@@ -72,8 +74,11 @@ read_coverage:
           artifacts: true
 
 build_docker_image:
+    needs:
+        - read_coverage
     tags:
         - local
+        - ubuntu
     stage: build
     before_script:
         - export PACKAGE_JSON_VERSION=$(cat package.json | jq -r .version)
@@ -99,6 +104,7 @@ push_docker_image:
         - build_docker_image
     tags:
         - local
+        - ubuntu
 
     stage: build
     before_script:
