@@ -1,3 +1,8 @@
+terraform {
+  backend "http" {
+  }
+}
+
 provider "aws"{
     region = "us-east-1"
 }
