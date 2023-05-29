@@ -2,12 +2,22 @@ provider "aws"{
     region = "us-east-1"
 }
 
-variable "vpc_cidr_blocks" {}
 variable "env_prefix" {}
+variable "vpc_cidr_blocks" {}
+variable "subnet_cidr_blocks" {}
 
-resource "aws_vpc" "vpc" {
+
+resource "aws_vpc" "ppp_vpc" {
     cidr_block = var.vpc_cidr_blocks
     tags = {
-        name: "${var.env_prefix}-vpc"
+        Name: "${var.env_prefix}-vpc"
     }
+}
+
+resource "aws_subnet" "ppp_subnet" {
+  vpc_id = aws_vpc.ppp_vpc
+  cidr_block = var.subnet_cidr_blocks
+  tags = {
+    Name = "${var.env_prefix}-subnet"
+  }
 }
