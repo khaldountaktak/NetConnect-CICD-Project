@@ -127,7 +127,7 @@ resource "aws_instance" "ppp_ec2" {
             "sudo yum install -y docker",
             "sudo systemctl start docker",
             "sudo docker login -u ${var.CI_REGISTRY_USER} -p ${var.CI_REGISTRY_PASSWORD} ${var.CI_REGISTRY}",
-            "sudo docker pull ${var.CI_REGISTRY_IMAGE}:0.0.1.95"
+            "sudo docker pull registry.gitlab.com/ppp-devops/netconnect:0.0.1.95"
         ]
     }
 
