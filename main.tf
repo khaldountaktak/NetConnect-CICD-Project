@@ -127,8 +127,8 @@ resource "aws_instance" "ppp_ec2" {
             "sudo apt upgrade -y",
             "sudo apt install docker.io",
             "sudo systemctl start docker",
-            "sudo docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}",
-            "sudo docker pull ${CI_REGISTRY_IMAGE}:0.0.1.95"
+            "sudo docker login -u ${var.CI_REGISTRY_USER} -p ${var.CI_REGISTRY_PASSWORD} ${var.CI_REGISTRY}",
+            "sudo docker pull ${var.CI_REGISTRY_IMAGE}:0.0.1.95"
         ]
   }
 
