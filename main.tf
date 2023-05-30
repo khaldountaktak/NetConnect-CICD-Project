@@ -134,7 +134,7 @@ resource "aws_instance" "ppp_ec2" {
 
 
     tags = {
-    name = "${var.env_prefix}-ec2"
+    Name = "${var.env_prefix}-ec2"
   }
 }
 
