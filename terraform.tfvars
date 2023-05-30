@@ -6,5 +6,5 @@ myip = "0.0.0.0/0"
 public_key_location="~/gitlab"
 private_key_location="~/gitlab.pem"
 
-ubuntu_ami="ami-053b0d53c279acc90"
+ami="ami-0715c1897453cabd1"
 ec2_type="t2.micro"

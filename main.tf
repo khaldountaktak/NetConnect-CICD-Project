@@ -20,7 +20,7 @@ variable "avail_zone" {}
 variable "myip" {}
 variable "public_key_location" {}
 variable "private_key_location" {}
-variable "ubuntu_ami" {}
+variable "ami" {}
 variable "ec2_type" {}
 variable "CI_REGISTRY_USER" {}
 variable "CI_REGISTRY_PASSWORD" {}
@@ -102,7 +102,7 @@ resource "aws_key_pair" "ppp_kp" {
 }
 
 resource "aws_instance" "ppp_ec2" {
-    ami = var.ubuntu_ami
+    ami = var.ami
     instance_type = var.ec2_type
 
     subnet_id = aws_subnet.ppp_subnet.id
