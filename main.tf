@@ -129,7 +129,7 @@ resource "aws_instance" "ppp_ec2" {
             "sudo systemctl start docker",
             "sudo docker login -u ${var.CI_REGISTRY_USER} -p ${var.CI_REGISTRY_PASSWORD} ${var.CI_REGISTRY}",
             "sudo docker pull ${var.CI_REGISTRY_IMAGE}:$VERSION",
-            "sudo docker run -p 3000:3000 -d  ${var.CI_REGISTRY_IMAGE}:$VERSION"
+            "sudo docker run -p 3000:3000 -d  ${var.CI_REGISTRY_IMAGE}:${var.VERSION}"
         ]
     }
 
