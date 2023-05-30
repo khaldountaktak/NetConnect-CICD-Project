@@ -22,8 +22,10 @@ variable "public_key_location" {}
 variable "private_key_location" {}
 variable "ubuntu_ami" {}
 variable "ec2_type" {}
-
-
+variable "CI_REGISTRY_USER" {}
+variable "CI_REGISTRY_PASSWORD" {}
+variable "CI_REGISTRY" {}
+variable "CI_REGISTRY_IMAGE" {}
 
 resource "aws_vpc" "ppp_vpc" {
     cidr_block = var.vpc_cidr_blocks
@@ -121,9 +123,12 @@ resource "aws_instance" "ppp_ec2" {
 
     provisioner "remote-exec" {
         inline = [
-            "apt update",
-            "apt upgrade -y",
-            "apt install docker.io"
+            "sudo apt update",
+            "sudo apt upgrade -y",
+            "sudo apt install docker.io",
+            "sudo systemctl start docker",
+            "sudo docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} ${CI_REGISTRY}",
+            "sudo docker pull ${CI_REGISTRY_IMAGE}:0.0.1.95"
         ]
   }
 

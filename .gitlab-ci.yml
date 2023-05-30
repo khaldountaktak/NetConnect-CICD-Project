@@ -125,11 +125,13 @@ deploy_terraform:
         - export TF_ADDRESS="https://gitlab.com/api/v4/projects/${PROJECT_ID}/terraform/state/old-state-name"
 
         - terraform init -backend-config=address=${TF_ADDRESS} -backend-config=lock_address=${TF_ADDRESS}/lock -backend-config=unlock_address=${TF_ADDRESS}/lock  -backend-config=username=${TF_USERNAME} -backend-config=password=${TF_PASSWORD} -backend-config=lock_method=POST -backend-config=unlock_method=DELETE -backend-config=retry_wait_min=5
-    
-        # - terraform init
+
         - export AWS_ACCESS_KEY_ID="$AWS_ACCESS_KEY_ID"
         - export AWS_SECRET_ACCESS_KEY="$AWS_SECRET_ACCESS_KEY"
-        # - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/id_rsa.pem
+        - export CI_REGISTRY_USER="$CI_REGISTRY_USER" 
+        - export CI_REGISTRY_PASSWORD="$CI_REGISTRY_PASSWORD" 
+        - export CI_REGISTRY="$CI_REGISTRY"
+        - export CI_REGISTRY_IMAGE=$"CI_REGISTRY_IMAGE"
         
     script:
         - terraform apply --auto-approve
