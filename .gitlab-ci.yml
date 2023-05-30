@@ -4,114 +4,114 @@ workflow:
       when: never
     - when: always
 stages:
-    # - test
-    # - build
+    - test
+    - build
     - deploy
 
 
-# lint_job:
-#     stage: test
-#     tags: 
-#         - windows
-#         - local 
-#     cache:
-#         key: "$CI_COMMIT_REF_NAME"
-#         paths:
-#             - "node_modules"
-#         policy: pull-push
-#     before_script:
-#         - npm install
-#     script:
-#         - echo "formatting code"
-#         - npm run format
-#         - echo "linting code"
-#         - npm run lint
+lint_job:
+    stage: test
+    tags: 
+        - windows
+        - local 
+    cache:
+        key: "$CI_COMMIT_REF_NAME"
+        paths:
+            - "node_modules"
+        policy: pull-push
+    before_script:
+        - npm install
+    script:
+        - echo "formatting code"
+        - npm run format
+        - echo "linting code"
+        - npm run lint
 
-# variables:
-#     MIN_THRESHOLD: 30
+variables:
+    MIN_THRESHOLD: 30
 
 
-# run_unit_tests:
-#     stage: test
-#     needs: 
-#         - lint_job
-#     coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-#     before_script:
-#         - npm install
-#     tags:
-#         - local
-#         - windows
-#     script:
-#         - $output = npm run test:report | Select-String -Pattern 'All files[^|]*\|[^|]*\s+([\d\.]+)'
-#         - echo $output
-#         - $splitValues = $output -split '\|'
-#         - $extractedValue = $splitValues[1].Trim()
-#         - echo $extractedValue
-#         - echo coverage=$extractedValue >> coverage.env
-#     artifacts:
-#         when: always
-#         paths:
-#             - ./junit.xml
-#             - ./coverage.env
-#         reports:
-#             junit: ./junit.xml
-#             dotenv: coverage.env
+run_unit_tests:
+    stage: test
+    needs: 
+        - lint_job
+    coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+    before_script:
+        - npm install
+    tags:
+        - local
+        - windows
+    script:
+        - $output = npm run test:report | Select-String -Pattern 'All files[^|]*\|[^|]*\s+([\d\.]+)'
+        - echo $output
+        - $splitValues = $output -split '\|'
+        - $extractedValue = $splitValues[1].Trim()
+        - echo $extractedValue
+        - echo coverage=$extractedValue >> coverage.env
+    artifacts:
+        when: always
+        paths:
+            - ./junit.xml
+            - ./coverage.env
+        reports:
+            junit: ./junit.xml
+            dotenv: coverage.env
 
-# read_coverage:
-#     stage: test
-#     tags:
-#         - windows
-#     script:
-#         - $output=cat coverage.env
-#         - $curr_coverage= $output -split '\=' 
-#         - $curr_coverage=$curr_coverage[1].Trim()
-#         - echo $curr_coverage
-#         - | 
-#           if ([double]$curr_coverage -lt [double]$MIN_THRESHOLD) {
-#           exit 1
-#           }
-#     needs:
-#         - job: run_unit_tests
-#           artifacts: true
+read_coverage:
+    stage: test
+    tags:
+        - windows
+    script:
+        - $output=cat coverage.env
+        - $curr_coverage= $output -split '\=' 
+        - $curr_coverage=$curr_coverage[1].Trim()
+        - echo $curr_coverage
+        - | 
+          if ([double]$curr_coverage -lt [double]$MIN_THRESHOLD) {
+          exit 1
+          }
+    needs:
+        - job: run_unit_tests
+          artifacts: true
 
-# build_docker_image:
-#     needs:
-#         - read_coverage
-#     tags:
-#         - local
-#         - ubuntu
-#     stage: build
-#     before_script:
-#         - export PACKAGE_JSON_VERSION=$(cat package.json | jq -r .version)
-#         - export VERSION=$PACKAGE_JSON_VERSION.$CI_PIPELINE_IID
-#         - echo "VERSION=$VERSION" > .env
-#         - echo "JWT_EXPIRES_IN=$PROD_JWT_EXPIRES_IN" >> .env
-#         - echo "JWT_SECRET=$PROD_JWT_SECRET" >> .env
-#         - echo "NEO4J_SCHEME=$PROD_NEO4J_SCHEME" >> .env
-#         - echo "NEO4J_HOST=$PROD_NEO4J_HOST" >> .env
-#         - echo "NEO4J_PORT=$PROD_NEO4J_PORT" >> .env
-#         - echo "NEO4J_USERNAME=$PROD_NEO4J_USERNAME" >> .env
-#         - echo "NEO4J_PASSWORD=$PROD_NEO4J_PASSWORD" >> .env
-#         - cat .env
-#     script:
-#         - docker build -t $CI_REGISTRY_IMAGE:$VERSION .
-#     artifacts:
-#         reports:
-#             dotenv: .env
+build_docker_image:
+    needs:
+        - read_coverage
+    tags:
+        - local
+        - ubuntu
+    stage: build
+    before_script:
+        - export PACKAGE_JSON_VERSION=$(cat package.json | jq -r .version)
+        - export VERSION=$PACKAGE_JSON_VERSION.$CI_PIPELINE_IID
+        - echo "VERSION=$VERSION" > .env
+        - echo "JWT_EXPIRES_IN=$PROD_JWT_EXPIRES_IN" >> .env
+        - echo "JWT_SECRET=$PROD_JWT_SECRET" >> .env
+        - echo "NEO4J_SCHEME=$PROD_NEO4J_SCHEME" >> .env
+        - echo "NEO4J_HOST=$PROD_NEO4J_HOST" >> .env
+        - echo "NEO4J_PORT=$PROD_NEO4J_PORT" >> .env
+        - echo "NEO4J_USERNAME=$PROD_NEO4J_USERNAME" >> .env
+        - echo "NEO4J_PASSWORD=$PROD_NEO4J_PASSWORD" >> .env
+        - cat .env
+    script:
+        - docker build -t $CI_REGISTRY_IMAGE:$VERSION .
+    artifacts:
+        reports:
+            dotenv: .env
      
 
-# push_docker_image:
-#     needs:
-#         - build_docker_image
-#     tags:
-#         - local
-#         - ubuntu
+push_docker_image:
+    needs:
+        - build_docker_image
+    tags:
+        - local
+        - ubuntu
 
-#     stage: build
-#     before_script:
-#         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-#     script:
-#         - docker push $CI_REGISTRY_IMAGE:$VERSION
+    stage: build
+    before_script:
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    script:
+        - docker push $CI_REGISTRY_IMAGE:$VERSION
 
 deploy_terraform:
     stage: deploy
