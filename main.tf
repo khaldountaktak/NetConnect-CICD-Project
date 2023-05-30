@@ -19,8 +19,10 @@ variable "subnet_cidr_blocks" {}
 variable "avail_zone" {}
 variable "myip" {}
 variable "public_key_location" {}
+variable "private_key_location" {}
 variable "ubuntu_ami" {}
 variable "ec2_type" {}
+
 
 
 resource "aws_vpc" "ppp_vpc" {
@@ -113,7 +115,7 @@ resource "aws_instance" "ppp_ec2" {
     connection {
         type     = "ssh"
         user     = "ec2-user"
-        password = var.root_password
+        private_key = file(var.private_key_location)
         host     = self.public_ip
     }
 
