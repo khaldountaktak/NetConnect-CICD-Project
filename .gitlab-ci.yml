@@ -132,6 +132,7 @@ deploy_terraform:
         - export TF_VAR_CI_REGISTRY_PASSWORD="$CI_REGISTRY_PASSWORD" 
         - export TF_VAR_CI_REGISTRY="$CI_REGISTRY"
         - export TF_VAR_CI_REGISTRY_IMAGE="$CI_REGISTRY_IMAGE"
+        - export TF_VAR_VERSION="$VERSION"
         - terraform destroy --auto-approve
         
     script:

@@ -26,6 +26,7 @@ variable "CI_REGISTRY_USER" {}
 variable "CI_REGISTRY_PASSWORD" {}
 variable "CI_REGISTRY" {}
 variable "CI_REGISTRY_IMAGE" {}
+variable "VERSION" {}
 
 resource "aws_vpc" "ppp_vpc" {
     cidr_block = var.vpc_cidr_blocks
@@ -127,8 +128,8 @@ resource "aws_instance" "ppp_ec2" {
             "sudo yum install -y docker",
             "sudo systemctl start docker",
             "sudo docker login -u ${var.CI_REGISTRY_USER} -p ${var.CI_REGISTRY_PASSWORD} ${var.CI_REGISTRY}",
-            "sudo docker pull ${var.CI_REGISTRY_IMAGE}:0.0.1.95",
-            "sudo docker run -p 3000:3000 -d  ${var.CI_REGISTRY_IMAGE}:0.0.1.95"
+            "sudo docker pull ${var.CI_REGISTRY_IMAGE}:$VERSION",
+            "sudo docker run -p 3000:3000 -d  ${var.CI_REGISTRY_IMAGE}:$VERSION"
         ]
     }
 
