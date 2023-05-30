@@ -121,9 +121,16 @@ resource "aws_instance" "ppp_ec2" {
         host     = self.public_ip
     }
 
-    provisioner "local-exec" {
-        command = "ansible-playbook --private-key ${var.private_key_location} playbook.yml -i ${self.public_ip}," 
+    provisioner "remote-exec"{
+        inline = [
+            "sudo yum update -y",
+            "sudo yum install -y yum-utils",
+            "sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo",
+            "sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin",
+            "sudo systemctl start docker
+        ]
     }
+
 
     tags = {
     name = "${var.env_prefix}-ec2"
