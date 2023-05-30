@@ -112,16 +112,16 @@ resource "aws_instance" "ppp_ec2" {
 
     connection {
         type     = "ssh"
-        user     = "root"
+        user     = "ec2-user"
         password = var.root_password
         host     = self.public_ip
     }
 
     provisioner "remote-exec" {
         inline = [
-            apt update,
-            apt upgrade -y,
-            apt install docker.io
+            "apt update",
+            "apt upgrade -y",
+            "apt install docker.io"
         ]
   }
 
