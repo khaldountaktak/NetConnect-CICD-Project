@@ -114,7 +114,7 @@ resource "aws_instance" "ppp_ec2" {
 
     connection {
         type     = "ssh"
-        user     = "ec2-user"
+        user     = "ubuntu"
         private_key = file(var.private_key_location)
         host     = self.public_ip
     }
