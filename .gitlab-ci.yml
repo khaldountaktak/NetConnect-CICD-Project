@@ -131,8 +131,7 @@ deploy_terraform:
         - export TF_VAR_CI_REGISTRY_USER="$CI_REGISTRY_USER" 
         - export TF_VAR_CI_REGISTRY_PASSWORD="$CI_REGISTRY_PASSWORD" 
         - export TF_VAR_CI_REGISTRY="$CI_REGISTRY"
-        - export TF_VAR_CI_REGISTRY_IMAGE=$"CI_REGISTRY_IMAGE"
-        - terraform destroy --auto-approve
+        - export TF_VAR_CI_REGISTRY_IMAGE="$CI_REGISTRY_IMAGE"
         
     script:
         - terraform apply --auto-approve
