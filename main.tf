@@ -97,7 +97,7 @@ resource "aws_security_group" "ppp_sg" {
 }
 
 resource "aws_key_pair" "ppp_kp" {
-  key_name = "ec2-key"
+  key_name = "gitlab"
   public_key = file(var.public_key_location)
 }
 
