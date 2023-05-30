@@ -130,7 +130,11 @@ resource "aws_instance" "ppp_ec2" {
             "sudo docker login -u ${var.CI_REGISTRY_USER} -p ${var.CI_REGISTRY_PASSWORD} ${var.CI_REGISTRY}",
             "sudo docker pull ${var.CI_REGISTRY_IMAGE}:0.0.1.95"
         ]
-  }
+    }
+
+    provisioner "local-exec" {
+        command = "ansible-playbook --private-key ${var.private_key_location} playbook.yml -i ${self.public_ip}," 
+    }
 
     tags = {
     name = "${var.env_prefix}-ec2"
