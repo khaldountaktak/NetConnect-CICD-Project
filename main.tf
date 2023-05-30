@@ -116,20 +116,9 @@ resource "aws_instance" "ppp_ec2" {
 
     connection {
         type     = "ssh"
-        user     = "ubuntu"
+        user     = "ec2-user"
         private_key = file(var.private_key_location)
         host     = self.public_ip
-    }
-
-    provisioner "remote-exec" {
-        inline = [
-            "sudo apt update",
-            "sudo apt upgrade -y",
-            "sudo apt install docker.io",
-            "sudo systemctl start docker",
-            "sudo docker login -u ${var.CI_REGISTRY_USER} -p ${var.CI_REGISTRY_PASSWORD} ${var.CI_REGISTRY}",
-            "sudo docker pull ${var.CI_REGISTRY_IMAGE}:0.0.1.95"
-        ]
     }
 
     provisioner "local-exec" {
